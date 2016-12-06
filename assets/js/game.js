@@ -15,6 +15,12 @@ $(document).ready(function() {
   var counter;
   var count;
 
+  var activeQuestion = {
+    question: "",
+    answer: '',
+    choices: [],
+  }
+
   // Questions 
     // Possible Answers
     // Correct Answer
@@ -49,19 +55,45 @@ $(document).ready(function() {
       counter = setInterval(questionTimer.count(),1000);
     },
     stopTimer: function(){
-      clearInterval(counter)
+      clearInterval(counter);
     },
-
+    timeUp: function(){
+      wrong++;
+      questionTimer.stopTimer();
+      questionTimer.reset();
+    },
   };
 
+  function getActiveQuestion(){
+    var keys = Object.keys(questions);
+    var questionPicked = questions[keys[ keys.length * Math.random() << 0]];
+    activeQuestion.question = questionPicked.question;
+    activeQuestion.answer = questionPicked.answer;
+    activeQuestion.choices = questionPicked.choices;
+    console.log(activeQuestion); 
+  }
 
+  getActiveQuestion();
 
-      
+    //Randomize order of possible answers
+  function randomize(questionChoices) {
+    activeQuestion.choices.sort(function() { 
+      return 0.5 - Math.random(); 
+    });
+  };
+ 
 
   // New Game Function
     // Resets score to zero
     // Sets new time countdown
+  $('.start').on('click',function(){
 
+
+  
+
+
+
+  });
 
   // Set event listeners for buttons on each question
     // Only allow one answer to be selected (radio buttons, no checkboxes)
