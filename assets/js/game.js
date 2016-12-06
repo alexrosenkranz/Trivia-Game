@@ -11,7 +11,7 @@ $(document).ready(function() {
   
   var correct;
   var wrong;
-  var answers = [];
+  var answer;
   var counter;
   var count;
   var i = 0;
@@ -49,11 +49,11 @@ $(document).ready(function() {
       $('.timeLeft').html(questionTimer.time);
     },
     count: function() {
-      questionTimer.time--;
       $('.timeLeft').html(questionTimer.time);
+      questionTimer.time--;
     },
     countDown: function(){
-      counter = setInterval(questionTimer.count(),1000);
+      counter = setInterval(questionTimer.count,1000);
     },
     stopTimer: function(){
       clearInterval(counter);
@@ -93,17 +93,27 @@ $(document).ready(function() {
     // Resets score to zero
     // Sets new time countdown
   $('.start').on('click',function(){
-    questionTimer.count();
+    questionTimer.countDown();
     getActiveQuestion();
     $('.game').show();
     $('.question').html(activeQuestion.question);
 
     $(activeQuestion.choices).each(function() {
-      $('.answers').append('<button class="btn btn-lg">' + activeQuestion.choices[i] + '</button>');
+      $('.answers').append('<button class="btn btn-lg options">' + activeQuestion.choices[i] + '</button>');
       i++;
     });
-    
+
+    $('.options').on('click', function(){
+      answer = $(this).html();
+      questionTimer.stopTimer();
+    });
+
     i=0;
+
+    if (answer == active.Question.answer && questionTimer > 0) {
+      correct++;
+      
+    };
     
 
 
