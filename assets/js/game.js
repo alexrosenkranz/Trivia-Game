@@ -14,6 +14,7 @@ $(document).ready(function() {
   var answers = [];
   var counter;
   var count;
+  var i = 0;
 
   var activeQuestion = {
     question: "",
@@ -66,14 +67,19 @@ $(document).ready(function() {
 
   function getActiveQuestion(){
     var keys = Object.keys(questions);
-    var questionPicked = questions[keys[ keys.length * Math.random() << 0]];
+    var objIndex = keys[ keys.length * Math.random() << 0];
+    var questionPicked = questions[objIndex];
     activeQuestion.question = questionPicked.question;
     activeQuestion.answer = questionPicked.answer;
     activeQuestion.choices = questionPicked.choices;
+    delete questions[objIndex];
     console.log(activeQuestion); 
+    console.log(questions);
+    console.log(questionPicked);
   }
 
-  getActiveQuestion();
+
+  
 
     //Randomize order of possible answers
   function randomize(questionChoices) {
@@ -87,10 +93,18 @@ $(document).ready(function() {
     // Resets score to zero
     // Sets new time countdown
   $('.start').on('click',function(){
+    questionTimer.count();
+    getActiveQuestion();
+    $('.game').show();
+    $('.question').html(activeQuestion.question);
 
-
-  
-
+    $(activeQuestion.choices).each(function() {
+      $('.answers').append('<button class="btn btn-lg">' + activeQuestion.choices[i] + '</button>');
+      i++;
+    });
+    
+    i=0;
+    
 
 
   });
