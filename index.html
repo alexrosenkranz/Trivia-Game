@@ -5,8 +5,9 @@
   <title>Trivia</title>
 
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
   <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
   <script type="text/javascript" src="assets/js/game.js"></script>
@@ -15,25 +16,28 @@
 <body>
 
   <div class="container text-center">
+    <div class="jumbotron">
     <h1>Trivia Gamez</h1>
-
+    <h2>Click below to start a new game.</h2>
     <div class="home">
       
       <button class="start btn-lg btn">New Game</button>
     </div>
+    </div>
     
-    <div class="game">
-      <div class="timeLeft"></div>
-      <div class="question"></div>
-      <div class="answers text-center"></div>
-    </div>
+    <div class="content">
+      <div class="game">
+        <div class="timeLeft"></div>
+        <div class="question"></div>
+        <div class="answers text-center"></div>
+      </div>
   
-    <div class="results">
-      <h2>Thanks for playing! See your results below and play again.</h2>
-      <h3 class="correct"></h3>
-      <h3 class="wrong"></h3>
+      <div class="results">
+        <h2>Thanks for playing! See your results below and play again.</h2>
+        <h3 class="correct"></h3>
+        <h3 class="wrong"></h3>
+      </div>
     </div>
-
   </div>
 
 </body>

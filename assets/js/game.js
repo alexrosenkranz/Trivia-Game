@@ -14,6 +14,7 @@ $(document).ready(function() {
   var answer;
   var counter;
   var count;
+  var timeout;
   var i = 0;
 
   var activeQuestion = {
@@ -35,7 +36,7 @@ $(document).ready(function() {
     q1: {
       question: "What was the 1st video ever played on MTV?",
       answer: 'Video Killed The Radio Star',
-      choices: ['Video Killed The Radio Star', 'Rock The Casbah', 'Billie Jean', 'Controversy'],
+      choices: ['Video Killed The Radio Star', 'Rock The Casbah', 'Billie Jean', 'Controversy','Back In Black'],
     },
     q2: {
       question: "What's the highest selling album of the 1980's in the US?",
@@ -57,6 +58,26 @@ $(document).ready(function() {
       answer: 'New Order',
       choices: ['New Order','The Talking Heads','Metallica','Bow Wow Wow','The Psychedlic Furs'],
     },
+    q6: {
+      question: "What Brooklyn-based band is originally from Ridgewood, NJ?",
+      answer: 'Real Estate',
+      choices: ['Real Estate','Small Black','Beach Fossils','Heavenly Beat','Kurt Vile'],
+    },
+    q7: {
+      question: "What New Brunswick, NJ music venue has hosted the likes of The Gaslight Anthem and The Bouncing Souls?",
+      answer: 'The Court Tavern',
+      choices: ['The Court Tavern','Olde Queens','Knight Club','The State Theatre','Sigma Chi Fraternity House'],
+    },
+    q8: {
+      question: "In what NJ town would you find E Street (of E-Street Band fame)",
+      answer: 'Belmar',
+      choices: ['Belmar','Asbury Park','Freehold','Long Branch','Red Bank'],
+    },
+    q9: {
+      question: "RHCP frontman Anthony Kiedis appears in this movie.",
+      answer: 'Point Break',
+      choices: ['Point Break','Back To The Future','Forrest Gump','Surf Ninjas','Addams Family Values'],
+    },
   };
 
 
@@ -69,6 +90,9 @@ $(document).ready(function() {
     reset: function(t) {
       questionTimer.time = t;
       $('.timeLeft').html(questionTimer.time);
+    },
+    gameTimeout: function(){
+      timeout = setTimeout(questionTimer.timeUp, 1000*15);
     },
     count: function() {
       $('.timeLeft').html(questionTimer.time);
@@ -93,8 +117,8 @@ $(document).ready(function() {
       questionTimer.stopTimer();
       $('.game').hide();
       $('.results').show();
-      $('.correct').html(correct);
-      $('.wrong').html(wrong);
+      $('.correct').html('Number Correct: ' + correct);
+      $('.wrong').html('Number Incorrect: ' + wrong);
       activeQuestion = false;
     };
   };
@@ -129,7 +153,7 @@ $(document).ready(function() {
       // Stop and Reset timer incase it was running
       questionTimer.stopTimer();
       questionTimer.reset(15);
-      setTimeout(questionTimer.timeUp, 1000*15);
+      questionTimer.gameTimeout()
       // Start Timer
       questionTimer.countDown();
 
@@ -146,6 +170,7 @@ $(document).ready(function() {
     $('.option').on('click', function(){
         answer = $(this).html();
         answerCheck();
+        clearTimeout(timeout);
       });
 
     
