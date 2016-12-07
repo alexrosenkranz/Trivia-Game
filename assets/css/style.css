@@ -2,19 +2,24 @@ body {
   background: url('../images/bg.gif') no-repeat fixed;
   background-size: cover;
   font-family: "ff-tisa-sans-web-pro";
+  color: rgba(40,239,203,1);
 
 }
-.jumbotron h1 {
-  font-family: "acier-bat-gris";
-  font-size: 90px;
-  line-height: 90px;
-  color: rgba(251,255,50,0.8);
 
+h5 {
+  font-size: 20px;
+  color: #3a3a3a;
 }
 
 button.start {
   background: rgba(40,239,203,1);
-  color: rgba(251,255,50,1);
+  color: #3a3a3a;
+}
+
+button.option {
+  margin: 10px; 
+  background: rgba(40,239,203,1);
+  color: #3a3a3a;
 }
 
 .container .jumbotron {
@@ -25,12 +30,21 @@ button.start {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28efcb', endColorstr='#fbff32',GradientType=0 );
   margin-top: 50px;
   border-radius: 50px;
+  box-shadow: 0px 0px 35px 0px;
 }
 
-button.option {margin: 10px;}
-
-.gameBody {
-  padding: 40px;
-  background: rgba(251,255,50,0.8);
+.jumbotron h1 {
+  font-family: "acier-bat-gris";
+  font-size: 78px;
+  line-height: 78px;
+  color: rgba(251,255,50,0.8);
   border-radius: 50px;
 }
+
+.gameBody {
+  color: #3a3a3a;
+  font-size: 24px;
+  margin-top: 40px;
+}
+
+

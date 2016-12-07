@@ -89,13 +89,13 @@ $(document).ready(function() {
     time: 15,
     reset: function(t) {
       questionTimer.time = t;
-      $('.timeLeft').html(questionTimer.time);
+      $('.timeLeft').html('Time Left: ' + questionTimer.time);
     },
     gameTimeout: function(){
       timeout = setTimeout(questionTimer.timeUp, 1000*15);
     },
     count: function() {
-      $('.timeLeft').html(questionTimer.time);
+      $('.timeLeft').html('Time Left: ' +questionTimer.time);
       questionTimer.time--;
     },
     countDown: function(){
@@ -147,25 +147,32 @@ $(document).ready(function() {
 
   // Starts up the game
   function game(){
+
     // Checks to see if there are no more questions first
     gameOver();
 
     // If there are still questions left
     if (Object.keys(questions).length > 0) {
+
       // Get Question
       var keys = Object.keys(questions);
       var objIndex = keys[ keys.length * Math.random() << 0];
       activeQuestion = questions[objIndex];
+
       // Reorder the choices so it's not obvious
       randomize();
+
       // Delete question so it can't be pulled again
       delete questions[objIndex];
+
       // Empty out answer area from previous question
       $('.answers').empty();
+
       // Stop and Reset timer incase it was running
       questionTimer.stopTimer();
       questionTimer.reset(15);
       questionTimer.gameTimeout()
+
       // Start Timer
       questionTimer.countDown();
 
@@ -191,31 +198,18 @@ $(document).ready(function() {
   };
 
 
-  
-
-   
- 
-
   // New Game Function
     // Resets score to zero
     // Sets new time countdown
   $('.start').on('click',function(){
     $('.results').hide();
     questions = questionInfo;
-
     correct = 0;
     wrong = 0;
     game();
     $('.game').show();
   });
     
-  
-
-    
-    
-
-
-
 
   // Set event listeners for buttons on each question
     // Only allow one answer to be selected (radio buttons, no checkboxes)
