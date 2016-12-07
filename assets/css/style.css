@@ -1,21 +1,36 @@
 body {
   background: url('../images/bg.gif') no-repeat fixed;
   background-size: cover;
+  font-family: "ff-tisa-sans-web-pro";
+
+}
+.jumbotron h1 {
+  font-family: "acier-bat-gris";
+  font-size: 90px;
+  line-height: 90px;
+  color: rgba(251,255,50,0.8);
+
+}
+
+button.start {
+  background: rgba(40,239,203,1);
+  color: rgba(251,255,50,1);
 }
 
 .container .jumbotron {
   background: rgb(40,239,203);
-background: -moz-linear-gradient(top,  rgba(40,239,203,1) 0%, rgba(38,171,224,1) 31%, rgba(173,43,255,1) 62%, rgba(251,255,50,.8) 100%);
-background: -webkit-linear-gradient(top,  rgba(40,239,203,1) 0%,rgba(38,171,224,1) 31%,rgba(173,43,255,1) 62%,rgba(251,255,50,.8) 100%);
-background: linear-gradient(to bottom,  rgba(40,239,203,1) 0%,rgba(38,171,224,1) 31%,rgba(173,43,255,1) 62%,rgba(251,255,50,.8) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28efcb', endColorstr='#fbff32',GradientType=0 );
-  margin-bottom: 0;
-  border-radius: 0;
+  background: -moz-linear-gradient(top,  rgba(40,239,203,0.8) 0%, rgba(38,171,224,0.8) 31%, rgba(173,43,255,0.8) 62%, rgba(251,255,50,.8) 100%);
+  background: -webkit-linear-gradient(top,  rgba(40,239,203,0.8) 0%,rgba(38,171,224,0.8) 31%,rgba(173,43,255,0.8) 62%,rgba(251,255,50,0.8) 100%);
+  background: linear-gradient(to bottom,  rgba(40,239,203,0.8) 0%,rgba(38,171,224,0.8) 31%,rgba(173,43,255,0.8) 62%,rgba(251,255,50,0.8) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28efcb', endColorstr='#fbff32',GradientType=0 );
+  margin-top: 50px;
+  border-radius: 50px;
 }
 
-button.option {margin: 20px;}
+button.option {margin: 10px;}
 
-.content {
+.gameBody {
   padding: 40px;
   background: rgba(251,255,50,0.8);
+  border-radius: 50px;
 }

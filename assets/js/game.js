@@ -112,6 +112,7 @@ $(document).ready(function() {
     },
   };
 
+  // Run this to make sure there are still questions left
   function gameOver() {
     if (Object.keys(questions).length === 0) {
       questionTimer.stopTimer();
@@ -123,6 +124,7 @@ $(document).ready(function() {
     };
   };
 
+  // Check if selected answer is correct or incorrect
   function answerCheck() {
     if (answer == activeQuestion.answer && questionTimer.time > 0) {
       correct++;
@@ -136,15 +138,25 @@ $(document).ready(function() {
     }
   }
 
+   //Randomize order of possible answers
+  function randomize() {
+    activeQuestion.choices.sort(function() { 
+      return 0.5 - Math.random(); 
+    });
+  };
 
+  // Starts up the game
   function game(){
+    // Checks to see if there are no more questions first
     gameOver();
 
+    // If there are still questions left
     if (Object.keys(questions).length > 0) {
       // Get Question
       var keys = Object.keys(questions);
       var objIndex = keys[ keys.length * Math.random() << 0];
       activeQuestion = questions[objIndex];
+      // Reorder the choices so it's not obvious
       randomize();
       // Delete question so it can't be pulled again
       delete questions[objIndex];
@@ -167,6 +179,8 @@ $(document).ready(function() {
       i++;
       });
     }; 
+
+    // When you click on a possible answer
     $('.option').on('click', function(){
         answer = $(this).html();
         answerCheck();
@@ -200,12 +214,7 @@ $(document).ready(function() {
     
     
 
- //Randomize order of possible answers
-  function randomize() {
-    activeQuestion.choices.sort(function() { 
-      return 0.5 - Math.random(); 
-    });
-  };
+
 
 
   // Set event listeners for buttons on each question
