@@ -26,17 +26,9 @@ $(document).ready(function() {
     // Possible Answers
     // Correct Answer
   var questions = {
-    q1: {
-      question: "How many letters are in the Greek alphabet (alpha,beta,gamma,etc)",
-      answer: 24,
-      choices: [48, 21, 32, 24],
-    },
-    q2: {
-      question: "What's the highest selling album of the 1980's in the US?",
-      answer: '"Thriller" by Michael Jackson',
-      choices: ['"Thriller" by Michael Jackson', '"Born In The USA" by Bruce Springsteen','"Purple Rain" by Prince','"Make It Big" by Wham!'],
-    },
+
   };
+
 
 
 
@@ -44,8 +36,8 @@ $(document).ready(function() {
   var questionTimer = {
     //Time Per Question
     time: 20,
-    reset: function() {
-      questionTimer.time = 20;
+    reset: function(t) {
+      questionTimer.time = t;
       $('.timeLeft').html(questionTimer.time);
     },
     count: function() {
@@ -60,66 +52,119 @@ $(document).ready(function() {
     },
     timeUp: function(){
       wrong++;
-      questionTimer.stopTimer();
-      questionTimer.reset();
+      questionTimer.reset(5)
+      $('.answers').html('<h2>Incorrect! The answer is ' + activeQuestion.answer + ' </h2>');
+      setTimeout(getActiveQuestion, 5000);
     },
   };
 
-  function getActiveQuestion(){
-    var keys = Object.keys(questions);
-    var objIndex = keys[ keys.length * Math.random() << 0];
-    activeQuestion = questions[objIndex];
-    delete questions[objIndex];
-    console.log(activeQuestion); 
-    console.log(questions);
-   
+  function gameOver() {
+    if (Object.keys(questions).length === 0) {
+      questionTimer.stopTimer();
+      $('.game').hide();
+      $('.results').show();
+      $('.correct').html(correct);
+      $('.wrong').html(wrong);
+      activeQuestion = false;
+    };
+  };
+
+  function answerCheck() {
+    if (answer == activeQuestion.answer && questionTimer.time > 0) {
+      correct++;
+      
+      questionTimer.reset(5);
+
+      $('.answers').html('<h2>Correct! The answer is ' + activeQuestion.answer + ' </h2>');
+      
+      setTimeout(getActiveQuestion, 5000);  
+      
+    }
+      
+    if (answer != activeQuestion.answer){
+      questionTimer.timeUp();
+    }
   }
+
+
+  function getActiveQuestion(){
+    gameOver();
+    if (Object.keys(questions).length > 0) {
+      i=0;
+      
+      $('.answers').empty();
+      questionTimer.stopTimer();
+      questionTimer.reset(20);
+      // Start 
+      questionTimer.countDown();
+      var keys = Object.keys(questions);
+      var objIndex = keys[ keys.length * Math.random() << 0];
+      activeQuestion = questions[objIndex];
+      delete questions[objIndex];
+      // console.log(activeQuestion); 
+      // console.log(activeQuestion.answer);
+      // console.log(activeQuestion.choices);
+
+      // Place question information into .game area
+      $('.question').html(activeQuestion.question);
+
+      $(activeQuestion.choices).each(function() {
+      $('.answers').append('<button class="btn btn-lg option">' + activeQuestion.choices[i] + '</button>');
+      i++;
+      });
+    }; 
+    $('.option').on('click', function(){
+        answer = $(this).html();
+        answerCheck();
+      });
+
+      if (questionTimer.time == 0) {
+        questionTimer.timeUp();
+      } 
+  };
 
 
   
 
-    //Randomize order of possible answers
-  function randomize(questionChoices) {
-    activeQuestion.choices.sort(function() { 
-      return 0.5 - Math.random(); 
-    });
-  };
+   
  
 
   // New Game Function
     // Resets score to zero
     // Sets new time countdown
   $('.start').on('click',function(){
-    questionTimer.countDown();
+    $('.results').hide();
+    questions = {
+      q1: {
+        question: "How many letters are in the Greek alphabet (alpha,beta,gamma,etc)",
+        answer: 24,
+        choices: [48, 21, 32, 24],
+      },
+      q2: {
+        question: "What's the highest selling album of the 1980's in the US?",
+        answer: '"Thriller" by Michael Jackson',
+        choices: ['"Thriller" by Michael Jackson', '"Born In The USA" by Bruce Springsteen','"Purple Rain" by Prince','"Make It Big" by Wham!'],
+      },
+    };
+
+    correct = 0;
+    wrong = 0;
     getActiveQuestion();
     $('.game').show();
-    $('.question').html(activeQuestion.question);
-
-    $(activeQuestion.choices).each(function() {
-      $('.answers').append('<button class="btn btn-lg options">' + activeQuestion.choices[i] + '</button>');
-      i++;
-    });
-
-    $('.options').on('click', function(){
-      answer = $(this).html();
-      questionTimer.stopTimer();
-      if (answer == activeQuestion.answer && questionTimer > 0) {
-      correct++;
-      setTimeout(getActiveQuestion, 4000);
-      
-    }
-    else {
-      setTimeout(getActiveQuestion, 4000);
-    }
-    });
-
-    i=0;
-
-    
-    
-
-
   });
+    
+  
+
+    
+    
+
+ //Randomize order of possible answers
+  function randomize(questionChoices) {
+    activeQuestion.choices.sort(function() { 
+      return 0.5 - Math.random(); 
+    });
+  };
+
 
   // Set event listeners for buttons on each question
     // Only allow one answer to be selected (radio buttons, no checkboxes)
