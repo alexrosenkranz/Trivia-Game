@@ -25,8 +25,38 @@ $(document).ready(function() {
   // Questions 
     // Possible Answers
     // Correct Answer
+
+  // This will be filled in during New Game function and emptied out throughout the game
   var questions = {
 
+  };
+
+  var questionInfo = {
+    q1: {
+      question: "What was the 1st video ever played on MTV?",
+      answer: 'Video Killed The Radio Star',
+      choices: ['Video Killed The Radio Star', 'Rock The Casbah', 'Billie Jean', 'Controversy'],
+    },
+    q2: {
+      question: "What's the highest selling album of the 1980's in the US?",
+      answer: '"Thriller" by Michael Jackson',
+      choices: ['"Thriller" by Michael Jackson', '"Born In The USA" by Bruce Springsteen','"Purple Rain" by Prince','"Make It Big" by Wham!'],
+    },
+    q3: {
+      question: "What was the title of Kayne West's debut album release in 2004?",
+      answer: 'The College Dropout',
+      choices: ['The College Dropout','Graduation','808s and Heartbreaks','The Life of Pablo','My Dark Twisted Fantasy','Yeezus','Late Registration'],
+    },
+    q4: {
+      question: "Who is the most hated Canadian artist?",
+      answer: 'Nickleback',
+      choices: ['Nickleback','Bryan Adams','Drake','Justin Bieber','Avril Lavigne', 'Sum 41'],
+    },
+    q5: {
+      question: "After Ian Curtis passed away in 1980, the remaining members of Joy Division went on to form this band.",
+      answer: 'New Order',
+      choices: ['New Order','The Talking Heads','Metallica','Bow Wow Wow','The Psychedlic Furs'],
+    },
   };
 
 
@@ -35,7 +65,7 @@ $(document).ready(function() {
   // Timer Stuff
   var questionTimer = {
     //Time Per Question
-    time: 20,
+    time: 15,
     reset: function(t) {
       questionTimer.time = t;
       $('.timeLeft').html(questionTimer.time);
@@ -54,7 +84,7 @@ $(document).ready(function() {
       wrong++;
       questionTimer.reset(5)
       $('.answers').html('<h2>Incorrect! The answer is ' + activeQuestion.answer + ' </h2>');
-      setTimeout(getActiveQuestion, 5000);
+      setTimeout(game, 5000);
     },
   };
 
@@ -72,13 +102,9 @@ $(document).ready(function() {
   function answerCheck() {
     if (answer == activeQuestion.answer && questionTimer.time > 0) {
       correct++;
-      
       questionTimer.reset(5);
-
       $('.answers').html('<h2>Correct! The answer is ' + activeQuestion.answer + ' </h2>');
-      
-      setTimeout(getActiveQuestion, 5000);  
-      
+      setTimeout(game, 5000);   
     }
       
     if (answer != activeQuestion.answer){
@@ -87,29 +113,33 @@ $(document).ready(function() {
   }
 
 
-  function getActiveQuestion(){
+  function game(){
     gameOver();
+
     if (Object.keys(questions).length > 0) {
-      i=0;
-      
-      $('.answers').empty();
-      questionTimer.stopTimer();
-      questionTimer.reset(20);
-      // Start 
-      questionTimer.countDown();
+      // Get Question
       var keys = Object.keys(questions);
       var objIndex = keys[ keys.length * Math.random() << 0];
       activeQuestion = questions[objIndex];
+      randomize();
+      // Delete question so it can't be pulled again
       delete questions[objIndex];
-      // console.log(activeQuestion); 
-      // console.log(activeQuestion.answer);
-      // console.log(activeQuestion.choices);
+      // Empty out answer area from previous question
+      $('.answers').empty();
+      // Stop and Reset timer incase it was running
+      questionTimer.stopTimer();
+      questionTimer.reset(15);
+      setTimeout(questionTimer.timeUp, 1000*15);
+      // Start Timer
+      questionTimer.countDown();
 
       // Place question information into .game area
       $('.question').html(activeQuestion.question);
-
+      // Reset counter
+      i=0;
+      //Create buttons for possible answers
       $(activeQuestion.choices).each(function() {
-      $('.answers').append('<button class="btn btn-lg option">' + activeQuestion.choices[i] + '</button>');
+      $('.answers').append('<button class="btn btn-lg option text-center">' + activeQuestion.choices[i] + '</button>');
       i++;
       });
     }; 
@@ -118,9 +148,7 @@ $(document).ready(function() {
         answerCheck();
       });
 
-      if (questionTimer.time == 0) {
-        questionTimer.timeUp();
-      } 
+    
   };
 
 
@@ -134,22 +162,11 @@ $(document).ready(function() {
     // Sets new time countdown
   $('.start').on('click',function(){
     $('.results').hide();
-    questions = {
-      q1: {
-        question: "How many letters are in the Greek alphabet (alpha,beta,gamma,etc)",
-        answer: 24,
-        choices: [48, 21, 32, 24],
-      },
-      q2: {
-        question: "What's the highest selling album of the 1980's in the US?",
-        answer: '"Thriller" by Michael Jackson',
-        choices: ['"Thriller" by Michael Jackson', '"Born In The USA" by Bruce Springsteen','"Purple Rain" by Prince','"Make It Big" by Wham!'],
-      },
-    };
+    questions = questionInfo;
 
     correct = 0;
     wrong = 0;
-    getActiveQuestion();
+    game();
     $('.game').show();
   });
     
@@ -159,7 +176,7 @@ $(document).ready(function() {
     
 
  //Randomize order of possible answers
-  function randomize(questionChoices) {
+  function randomize() {
     activeQuestion.choices.sort(function() { 
       return 0.5 - Math.random(); 
     });
