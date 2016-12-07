@@ -68,14 +68,11 @@ $(document).ready(function() {
   function getActiveQuestion(){
     var keys = Object.keys(questions);
     var objIndex = keys[ keys.length * Math.random() << 0];
-    var questionPicked = questions[objIndex];
-    activeQuestion.question = questionPicked.question;
-    activeQuestion.answer = questionPicked.answer;
-    activeQuestion.choices = questionPicked.choices;
+    activeQuestion = questions[objIndex];
     delete questions[objIndex];
     console.log(activeQuestion); 
     console.log(questions);
-    console.log(questionPicked);
+   
   }
 
 
@@ -106,14 +103,19 @@ $(document).ready(function() {
     $('.options').on('click', function(){
       answer = $(this).html();
       questionTimer.stopTimer();
+      if (answer == activeQuestion.answer && questionTimer > 0) {
+      correct++;
+      setTimeout(getActiveQuestion, 4000);
+      
+    }
+    else {
+      setTimeout(getActiveQuestion, 4000);
+    }
     });
 
     i=0;
 
-    if (answer == active.Question.answer && questionTimer > 0) {
-      correct++;
-      
-    };
+    
     
 
 
