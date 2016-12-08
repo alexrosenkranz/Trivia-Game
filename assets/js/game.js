@@ -28,62 +28,11 @@ $(document).ready(function() {
     // Correct Answer
 
   // This will be filled in during New Game function and emptied out throughout the game
-  var questions = {
-
-  };
-
-  var questionInfo = {
-    q1: {
-      question: "What was the 1st video ever played on MTV?",
-      answer: 'Video Killed The Radio Star',
-      choices: ['Video Killed The Radio Star', 'Rock The Casbah', 'Billie Jean', 'Controversy','Back In Black'],
-    },
-    q2: {
-      question: "What's the highest selling album of the 1980's in the US?",
-      answer: '"Thriller" by Michael Jackson',
-      choices: ['"Thriller" by Michael Jackson', '"Born In The USA" by Bruce Springsteen','"Purple Rain" by Prince','"Make It Big" by Wham!'],
-    },
-    q3: {
-      question: "What was the title of Kayne West's debut album release in 2004?",
-      answer: 'The College Dropout',
-      choices: ['The College Dropout','Graduation','808s and Heartbreaks','The Life of Pablo','My Dark Twisted Fantasy','Yeezus','Late Registration'],
-    },
-    q4: {
-      question: "Who is the most hated Canadian artist?",
-      answer: 'Nickleback',
-      choices: ['Nickleback','Bryan Adams','Drake','Justin Bieber','Avril Lavigne', 'Sum 41'],
-    },
-    q5: {
-      question: "After Ian Curtis passed away in 1980, the remaining members of Joy Division went on to form this band.",
-      answer: 'New Order',
-      choices: ['New Order','The Talking Heads','Metallica','Bow Wow Wow','The Psychedlic Furs'],
-    },
-    q6: {
-      question: "What Brooklyn-based band is originally from Ridgewood, NJ?",
-      answer: 'Real Estate',
-      choices: ['Real Estate','Small Black','Beach Fossils','Heavenly Beat','Kurt Vile'],
-    },
-    q7: {
-      question: "What New Brunswick, NJ music venue has hosted the likes of The Gaslight Anthem and The Bouncing Souls?",
-      answer: 'The Court Tavern',
-      choices: ['The Court Tavern','Olde Queens','Knight Club','The State Theatre','Sigma Chi Fraternity House'],
-    },
-    q8: {
-      question: "In what NJ town would you find E Street (of E-Street Band fame)",
-      answer: 'Belmar',
-      choices: ['Belmar','Asbury Park','Freehold','Long Branch','Red Bank'],
-    },
-    q9: {
-      question: "RHCP frontman Anthony Kiedis appears in this movie.",
-      answer: 'Point Break',
-      choices: ['Point Break','Back To The Future','Forrest Gump','Surf Ninjas','Addams Family Values'],
-    },
-  };
+  var questions = {};
 
 
 
-
-  // Timer Stuff
+  // Timer Settings
   var questionTimer = {
     //Time Per Question
     time: 15,
@@ -92,7 +41,7 @@ $(document).ready(function() {
       $('.timeLeft').html('Time Left: ' + questionTimer.time);
     },
     gameTimeout: function(){
-      timeout = setTimeout(questionTimer.timeUp, 1000*15);
+      timeout = setTimeout(questionTimer.timeUp, 1000*16);
     },
     count: function() {
       $('.timeLeft').html('Time Left: ' +questionTimer.time);
@@ -180,6 +129,7 @@ $(document).ready(function() {
       $('.question').html(activeQuestion.question);
       // Reset counter
       i=0;
+
       //Create buttons for possible answers
       $(activeQuestion.choices).each(function() {
       $('.answers').append('<button class="btn btn-lg option text-center">' + activeQuestion.choices[i] + '</button>');
@@ -193,31 +143,71 @@ $(document).ready(function() {
         answerCheck();
         clearTimeout(timeout);
       });
-
-    
   };
 
-
-  // New Game Function
+   // New Game Function
     // Resets score to zero
     // Sets new time countdown
-  $('.start').on('click',function(){
+  function newGame() {
     $('.results').hide();
-    questions = questionInfo;
+    // questions = questionInfo;
     correct = 0;
     wrong = 0;
-    game();
     $('.game').show();
+  }
+
+ 
+  $('.home').on('click','.start',function(){
+    questions = {
+    q1: {
+      question: "What was the 1st video ever played on MTV?",
+      answer: 'Video Killed The Radio Star',
+      choices: ['Video Killed The Radio Star', 'Rock The Casbah', 'Billie Jean', 'Controversy','Back In Black'],
+    },
+    q2: {
+      question: "What's the highest selling album of the 1980's in the US?",
+      answer: '"Thriller" by Michael Jackson',
+      choices: ['"Thriller" by Michael Jackson', '"Born In The USA" by Bruce Springsteen','"Purple Rain" by Prince','"Make It Big" by Wham!'],
+    },
+    q3: {
+      question: "What was the title of Kayne West's debut album release in 2004?",
+      answer: 'The College Dropout',
+      choices: ['The College Dropout','Graduation','808s and Heartbreaks','The Life of Pablo','My Dark Twisted Fantasy','Yeezus','Late Registration'],
+    },
+    q4: {
+      question: "Who is the most hated Canadian artist?",
+      answer: 'Nickleback',
+      choices: ['Nickleback','Bryan Adams','Drake','Justin Bieber','Avril Lavigne', 'Sum 41'],
+    },
+    q5: {
+      question: "After Ian Curtis passed away in 1980, the remaining members of Joy Division went on to form this band.",
+      answer: 'New Order',
+      choices: ['New Order','The Talking Heads','Metallica','Bow Wow Wow','The Psychedlic Furs'],
+    },
+    q6: {
+      question: "What Brooklyn-based band is originally from Ridgewood, NJ?",
+      answer: 'Real Estate',
+      choices: ['Real Estate','Small Black','Beach Fossils','Heavenly Beat','Kurt Vile'],
+    },
+    q7: {
+      question: "What New Brunswick, NJ music venue has hosted the likes of The Gaslight Anthem and The Bouncing Souls?",
+      answer: 'The Court Tavern',
+      choices: ['The Court Tavern','Olde Queens','Knight Club','The State Theatre','Sigma Chi Fraternity House'],
+    },
+    q8: {
+      question: "In what NJ town would you find E Street (of E-Street Band fame)",
+      answer: 'Belmar',
+      choices: ['Belmar','Asbury Park','Freehold','Long Branch','Red Bank'],
+    },
+    q9: {
+      question: "RHCP frontman Anthony Kiedis appears in this movie.",
+      answer: 'Point Break',
+      choices: ['Point Break','Back To The Future','Forrest Gump','Surf Ninjas','Addams Family Values'],
+    },};
+    newGame();
+    console.log(questions);
+    game();
   });
     
-
-  // Set event listeners for buttons on each question
-    // Only allow one answer to be selected (radio buttons, no checkboxes)
-
-
-  // Run function after time runs out that shows results of game
-    // tell user if the questions was answered correctly 
-    // assign button to restart game
-
 
 });
