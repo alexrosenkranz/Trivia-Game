@@ -30,6 +30,55 @@ $(document).ready(function() {
   // This will be filled in during New Game function and emptied out throughout the game
   var questions = {};
 
+  function setQuestions() {
+    questions = {
+      q1: {
+        question: "What was the 1st video ever played on MTV?",
+        answer: 'Video Killed The Radio Star',
+        choices: ['Video Killed The Radio Star', 'Rock The Casbah', 'Billie Jean', 'Controversy','Back In Black'],
+      },
+      q2: {
+        question: "What's the highest selling album of the 1980's in the US?",
+        answer: '"Thriller" by Michael Jackson',
+        choices: ['"Thriller" by Michael Jackson', '"Born In The USA" by Bruce Springsteen','"Purple Rain" by Prince','"Make It Big" by Wham!'],
+      },
+      q3: {
+        question: "What was the title of Kayne West's debut album release in 2004?",
+        answer: 'The College Dropout',
+        choices: ['The College Dropout','Graduation','808s and Heartbreaks','The Life of Pablo','My Dark Twisted Fantasy','Yeezus','Late Registration'],
+      },
+      q4: {
+        question: "Who is the most hated Canadian artist?",
+        answer: 'Nickleback',
+        choices: ['Nickleback','Bryan Adams','Drake','Justin Bieber','Avril Lavigne', 'Sum 41'],
+      },
+      q5: {
+        question: "After Ian Curtis passed away in 1980, the remaining members of Joy Division went on to form this band.",
+        answer: 'New Order',
+        choices: ['New Order','The Talking Heads','Metallica','Bow Wow Wow','The Psychedlic Furs'],
+      },
+      q6: {
+        question: "What Brooklyn-based band is originally from Ridgewood, NJ?",
+        answer: 'Real Estate',
+        choices: ['Real Estate','Small Black','Beach Fossils','Heavenly Beat','Kurt Vile'],
+      },
+      q7: {
+        question: "What New Brunswick, NJ music venue has hosted the likes of The Gaslight Anthem and The Bouncing Souls?",
+        answer: 'The Court Tavern',
+        choices: ['The Court Tavern','Olde Queens','Knight Club','The State Theatre','Sigma Chi Fraternity House'],
+      },
+      q8: {
+        question: "In what NJ town would you find E Street (of E-Street Band fame)",
+        answer: 'Belmar',
+        choices: ['Belmar','Asbury Park','Freehold','Long Branch','Red Bank'],
+      },
+      q9: {
+        question: "RHCP frontman Anthony Kiedis appears in this movie.",
+        answer: 'Point Break',
+        choices: ['Point Break','Back To The Future','Forrest Gump','Surf Ninjas','Addams Family Values'],
+      }
+    };
+  }
 
 
   // Timer Settings
@@ -158,54 +207,9 @@ $(document).ready(function() {
 
  
   $('.home').on('click','.start',function(){
-    questions = {
-    q1: {
-      question: "What was the 1st video ever played on MTV?",
-      answer: 'Video Killed The Radio Star',
-      choices: ['Video Killed The Radio Star', 'Rock The Casbah', 'Billie Jean', 'Controversy','Back In Black'],
-    },
-    q2: {
-      question: "What's the highest selling album of the 1980's in the US?",
-      answer: '"Thriller" by Michael Jackson',
-      choices: ['"Thriller" by Michael Jackson', '"Born In The USA" by Bruce Springsteen','"Purple Rain" by Prince','"Make It Big" by Wham!'],
-    },
-    q3: {
-      question: "What was the title of Kayne West's debut album release in 2004?",
-      answer: 'The College Dropout',
-      choices: ['The College Dropout','Graduation','808s and Heartbreaks','The Life of Pablo','My Dark Twisted Fantasy','Yeezus','Late Registration'],
-    },
-    q4: {
-      question: "Who is the most hated Canadian artist?",
-      answer: 'Nickleback',
-      choices: ['Nickleback','Bryan Adams','Drake','Justin Bieber','Avril Lavigne', 'Sum 41'],
-    },
-    q5: {
-      question: "After Ian Curtis passed away in 1980, the remaining members of Joy Division went on to form this band.",
-      answer: 'New Order',
-      choices: ['New Order','The Talking Heads','Metallica','Bow Wow Wow','The Psychedlic Furs'],
-    },
-    q6: {
-      question: "What Brooklyn-based band is originally from Ridgewood, NJ?",
-      answer: 'Real Estate',
-      choices: ['Real Estate','Small Black','Beach Fossils','Heavenly Beat','Kurt Vile'],
-    },
-    q7: {
-      question: "What New Brunswick, NJ music venue has hosted the likes of The Gaslight Anthem and The Bouncing Souls?",
-      answer: 'The Court Tavern',
-      choices: ['The Court Tavern','Olde Queens','Knight Club','The State Theatre','Sigma Chi Fraternity House'],
-    },
-    q8: {
-      question: "In what NJ town would you find E Street (of E-Street Band fame)",
-      answer: 'Belmar',
-      choices: ['Belmar','Asbury Park','Freehold','Long Branch','Red Bank'],
-    },
-    q9: {
-      question: "RHCP frontman Anthony Kiedis appears in this movie.",
-      answer: 'Point Break',
-      choices: ['Point Break','Back To The Future','Forrest Gump','Surf Ninjas','Addams Family Values'],
-    },};
+    setQuestions();
     newGame();
-    console.log(questions);
+    
     game();
   });
     
